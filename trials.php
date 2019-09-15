@@ -28,7 +28,7 @@ function binarySum ($a, $b){
 // isPowerOfThree(4); // → false
 // isPowerOfThree(9); // → true
 
-
+// мое решение
 function isPowerOfThree ($num) {
   if ($num == 0 || $num == 6) {
       return false;
@@ -40,6 +40,9 @@ function isPowerOfThree ($num) {
     return false;
   }
 }
+// мое решение
+
+
 //решение учителя .. круто сделано
 
 // BEGIN
