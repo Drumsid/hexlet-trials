@@ -101,3 +101,27 @@ function addDigits($num) {
   }
 
 }
+
+// решение учителя
+
+// BEGIN
+function sumDigits(int $number)
+{
+    $str = (string) $number;
+    $result = 0;
+    for ($i = 0; $i < strlen($str); $i++) {
+        $result += (int) $str[$i];
+    }
+    return $result;
+}
+
+function addDigits($num)
+{
+    $result = $num;
+    while ($result >= 10) {
+        $result = sumDigits($result);
+    }
+
+    return $result;
+}
+// END
