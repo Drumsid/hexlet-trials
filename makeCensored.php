@@ -1,27 +1,17 @@
 <?php
-// Реализуйте функцию makeCensored, которая заменяет каждое вхождение указанных слов
-//  в предложении на последовательность $#%! и возвращает полученную строку. 
 
-//  Аргументы:
-//  1.Текст
-//  2.Набор стоп слов
+// Реализуйте функцию getSameCount, которая считает количество общих уникальных 
+// элементов для двух массивов. 
 
-// Словом считается любая непрерывная последовательность символов, включая любые спецсимволы (без пробелов).
-
+// Аргументы:
+//  1.Первый массив
+//  2.Второй массив
 // Примеры
 
-
-// use function App\Strings\makeCensored;
-
-// $sentence = 'When you play the game of thrones, you win or you die';
-// makeCensored($sentence, ['die', 'play']);
-// // => When you $#%! the game of thrones, you win or you $#%!
-
-// $sentence2 = 'chicken chicken? chicken! chicken';
-// makeCensored($sentence2, ['?', 'chicken']);
-// // => '$#%! chicken? chicken! $#%!';
-// Подсказки
-// Тернарная операция может сослужить вам хорошую службу в этой практике.
+// getSameCount([], []); // 0
+// getSameCount([4, 4], [4, 4]); // 1
+// getSameCount([1, 10, 3], [10, 100, 35, 1]); // 2
+// getSameCount([1, 3, 2, 2], [3, 1, 1, 2]); // 3
 
 //=========================================================================================
 //=========================================================================================
@@ -31,31 +21,29 @@
 //=======================================MY SOLUTION ==================================================
 
 // BEGIN (write your solution here)
-function makeCensored($str, $arrFindWord){
-    $allWordInArr = explode(" ", $str);
-    $checkWords = [];
+function getSameCount($arr1, $arr2) {
+    $arr1 = array_values(array_unique($arr1));
+    $length = count(array_unique($arr1));
+    $count = 0;
     
-    $lengthFind = count($arrFindWord);
-    
-    
-    foreach ($allWordInArr as $key => $word) {
-        
-        for ($i = 0; $i < $lengthFind; $i++) {
-            
-            if($word == $arrFindWord[$i]) {
-                
-                $checkWords[$key] = '$#%!';
-                $i = 0;
-                break;
-            } 
-            
-            $checkWords[$key] = $word;
-
-        }
-
+    for($i = 0; $i < $length; $i++){
+        $count += findNum($arr2, $arr1[$i]);
     }
     
-    return $result = implode(" ", $checkWords);
+    return $count;
+}
+
+
+
+function findNum($arr, $num){
+    $arr = array_values(array_unique($arr));
+    $length = count($arr);
+    for ($i = 0; $i < $length; $i++){
+        if($arr[$i] === $num) {
+            return 1;
+        }
+    }
+    return 0;
 }
 // END
 
@@ -65,15 +53,20 @@ function makeCensored($str, $arrFindWord){
 //=======================================Teacher SOLUTION ==================================================
 
 // BEGIN
-function makeCensored(string $text, array $stopWords)
+function getSameCount($coll1, $coll2)
 {
-    $words = explode(' ', $text);
-    $result = [];
-    foreach ($words as $word) {
-        $result[] = in_array($word, $stopWords) ? '$#%!' : $word;
+    $count = 0;
+    $uniqColl1 = array_unique($coll1);
+    $uniqColl2 = array_unique($coll2);
+    foreach ($uniqColl1 as $item1) {
+        foreach ($uniqColl2 as $item2) {
+            if ($item1 === $item2) {
+                $count++;
+            }
+        }
     }
 
-    return implode(' ', $result);
+    return $count;
 }
 // END
 
