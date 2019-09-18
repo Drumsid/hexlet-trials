@@ -16,8 +16,14 @@
 isBalanced('(())');  // true
 isBalanced('((())'); // false
 
-// ищу решение
+//=========================================================================================
+//=========================================================================================
+//=========================================================================================
 
+
+//=======================================MY SOLUTION ==================================================
+
+// BEGIN (write your solution here)
 function isBalanced($str){
         $length = strlen($str);
         $leftBrecket = "";
@@ -29,6 +35,9 @@ function isBalanced($str){
         } else if ($str[$i] == ')'){
             $rightBrecket++;
         }
+        if ($leftBrecket < $rightBrecket ) {
+            return false;
+        }
     }
     if ($leftBrecket == $rightBrecket){
         return true;
@@ -36,3 +45,59 @@ function isBalanced($str){
         return false;
     }
 }
+// END
+
+//=======================================MY SOLUTION ==================================================
+
+//=======================================Teacher SOLUTION ==================================================
+
+// BEGIN
+function isBalanced($str)
+{
+    $count = 0;
+    for ($i = 0; $i < strlen($str); $i++) {
+        $count = $str[$i] === '(' ? $count + 1 : $count - 1;
+        if ($count < 0) {
+            return false;
+        }
+    }
+
+    return $count === 0;
+}
+// END
+
+//=======================================Teacher SOLUTION ==================================================
+
+
+// так же эта функция isBalanced подходит для следующей задачи:
+// Реализуйте функцию checkIfBalanced, которая проверяет балансировку круглых скобок в арифметических выражениях.
+
+
+// checkIfBalanced('(5 + 6) * (7 + 8)/(4 + 3)'); // => true
+// checkIfBalanced('(4 + 3))'); // => false 
+
+
+//=======================================Teacher SOLUTION ==================================================
+// BEGIN
+function checkIfBalanced(string $expression): bool
+{
+    // инициализируем стек
+    $stack = [];
+    for ($i = 0, $length = strlen($expression); $i < $length; $i++) {
+        $curr = $expression[$i];
+        if ($curr == '(') {
+            array_push($stack, $curr);
+        } elseif ($curr == ')') {
+            if (empty($stack)) {
+                return false;
+            }
+            array_pop($stack);
+        };
+    }
+
+    // Если стек оказался пустой после обхода строки, то значит все хорошо
+    return count($stack) == 0;
+}
+// END
+
+//=======================================Teacher SOLUTION ==================================================
