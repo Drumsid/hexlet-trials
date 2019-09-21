@@ -24,15 +24,16 @@
 //=======================================MY SOLUTION ==================================================
 
 // BEGIN (write your solution here)
-function compareVersion ($version1, $version2)
+function compareVersion($version1, $version2)
 {
     if (version_compare($version1, $version2, '>')) {
         return 1;
    } elseif (version_compare($version1, $version2, '<')) {
         return -1;
-        } 
+        }
     elseif (version_compare($version1, $version2, '=')) { return 0; }
-    else { return 0; }
+    else { return 0;
+    }
 }
 // END
 
@@ -51,5 +52,3 @@ function compareVersion(string $first, string $second)
 // END
 }
 //=======================================Teacher SOLUTION ==================================================
-
-
