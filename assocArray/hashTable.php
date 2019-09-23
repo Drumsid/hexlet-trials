@@ -30,9 +30,7 @@
 //     Индекс по которому будет храниться значение во внутреннем массиве вычисляется так: crc32($key) % 1000.
 //     То есть к ключу применяется хеш-функция и берется остаток от деления на тысячу. Это нужно для ограничения размера массива в разумных рамках.
 
-    //===============================================================
-
-    // не понятно задание и как решить тоже.
+//=======================================MY SOLUTION ==================================================
 
 // BEGIN (write your solution here)
 function make(){
@@ -40,26 +38,75 @@ function make(){
 }
 
 
-function set($arr, $key, $val ){
-    $key = crc32($key) % 1000;
-
-    if(array_key_exists($key, $arr)){
+function set(&$arr, $key, $val ){
+    $hash = crc32($key) % 1000;
+    
+    if(array_key_exists($hash, $arr) && $arr[$hash][1] == $val){
         return false;
-    } else {
-        $arr[$key] = $val;
+    } 
+    else if (array_key_exists($hash, $arr) && ($arr[$hash][0] != $key && $arr[$hash][1] != $val)) {
+        return false;// need change hash
+    }
+    else if (array_key_exists($hash, $arr) && $arr[$hash][1] != $val) {
+        $arr[$hash][1] = $val;
+        return true;
+    } 
+    else {
+        $arr[$hash] = [$key, $val];
         return true;
     }
 }
 
 
 function get($arr, $key, $val = null) {
-    $key = crc32($key) % 1000;
-
-    if(array_key_exists($key, $arr)) {
-        return $val;
-    }
+    $hash = crc32($key) % 1000;
+    
+    if(array_key_exists($hash, $arr)) {
+        return $arr[$hash][1];
+    } 
     else {
         return $val;
     }
 }
 // END
+
+//=======================================MY SOLUTION ==================================================
+
+//=======================================Teacher SOLUTION ==================================================
+
+// BEGIN
+function getIndex($key)
+{
+    return crc32($key) % 1000;
+}
+
+function make()
+{
+    return [];
+}
+
+function set(&$map, $key, $value)
+{
+    $index = getIndex($key);
+    if (isset($map[$index])) {
+        [$currentKey] = $map[$index];
+        if ($currentKey != $key) {
+            return false;
+        }
+    }
+    $map[$index] = [$key, $value];
+    return true;
+}
+
+function get($map, $key, $default = null)
+{
+    $index = getIndex($key);
+    if (!isset($map[$index])) {
+        return $default;
+    }
+    [, $value] = $map[$index];
+    return $value;
+}
+// END
+
+//=======================================Teacher SOLUTION ==================================================
