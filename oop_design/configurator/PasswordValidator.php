@@ -3,6 +3,7 @@
 class PasswordValidator
 {
     // BEGIN (write your solution here)
+<<<<<<< HEAD
     // public static $options = [
     //         'minLength' => 8,
     //         'containNumbers' => false        
@@ -10,22 +11,36 @@ class PasswordValidator
     public $options = [
         'minLength' => 8,
         'containNumbers' => false 
+=======
+    public static $options = [
+            'minLength' => 8,
+            'containNumbers' => false        
+>>>>>>> c6e667ca40160fc35cfe499de4ebab31c4e93d47
     ];
 
     public function __construct($options = [])
     {
+<<<<<<< HEAD
         // self::$options = array_merge(self::$options, $options);
         $this->options = array_merge($this->options, $options);
+=======
+        self::$options = array_merge(self::$options, $options);
+>>>>>>> c6e667ca40160fc35cfe499de4ebab31c4e93d47
     }
 
     public function getContainNumbers()
     {
+<<<<<<< HEAD
         // return self::$options['containNumbers'];
         return $this->options['containNumbers'];
+=======
+        return self::$options['containNumbers'];
+>>>>>>> c6e667ca40160fc35cfe499de4ebab31c4e93d47
     }
 
     public function getOptions()
     {
+<<<<<<< HEAD
         // return self::$options;
          return $this->options;
     }
@@ -33,6 +48,9 @@ class PasswordValidator
     public function gethasNumber($subject)
     {
         return $this->hasNumber($subject);
+=======
+        return self::$options;
+>>>>>>> c6e667ca40160fc35cfe499de4ebab31c4e93d47
     }
 
     public function validate($subject)
@@ -61,6 +79,7 @@ class PasswordValidator
     }
 }
 
+<<<<<<< HEAD
 
 //================================================================================================================
 // class PasswordValidator  не рабочий вариант
@@ -80,16 +99,37 @@ class PasswordValidator
 //         }
 //         // self::$options = array_merge(self::$options, $options);
         
+=======
+// class PasswordValidator
+// {
+//     // BEGIN (write your solution here)
+//     private $options = [
+//         'minLength' => 8,
+//         'containNumbers' => 'false'
+//          ];
+
+//     public function __construct($options = [])
+//     {
+//         $this->options = array_merge($this->options, $options);
+>>>>>>> c6e667ca40160fc35cfe499de4ebab31c4e93d47
 //     }
 
 //     public function getContainNumbers()
 //     {
+<<<<<<< HEAD
 //         return self::$containNumbers;
+=======
+//         return $this->options['containNumbers'];
+>>>>>>> c6e667ca40160fc35cfe499de4ebab31c4e93d47
 //     }
 
 //     public function getOptions()
 //     {
+<<<<<<< HEAD
 //         return self::$defaultOptions;
+=======
+//         return $this->options;
+>>>>>>> c6e667ca40160fc35cfe499de4ebab31c4e93d47
 //     }
 
 //     public function validate($subject)
@@ -103,6 +143,7 @@ class PasswordValidator
 //         }
 //         return $result;
 //     }
+<<<<<<< HEAD
 //     private function countLenght($subject)
 //     {
 //         if (strlen($subject) < 8) {
@@ -158,6 +199,15 @@ class PasswordValidator
 //             return false;
 //         }
 //         return true;
+=======
+
+//     private function countLenght($subject)
+//     {
+//     	if (strlen($subject) < 8) {
+//     		return false;
+//     	}
+//     	return true;
+>>>>>>> c6e667ca40160fc35cfe499de4ebab31c4e93d47
 //     }
 //     // END
 
@@ -165,6 +215,7 @@ class PasswordValidator
 //     {
 //         return strpbrk($subject, '1234567890') !== false;
 //     }
+<<<<<<< HEAD
 // }
 
 
@@ -199,3 +250,6 @@ class PasswordValidator
     //     return $errors;
     // }
     // END
+=======
+// }
+>>>>>>> c6e667ca40160fc35cfe499de4ebab31c4e93d47
