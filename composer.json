@@ -1,0 +1,5 @@
+{
+    "require": {
+        "php-ds/php-ds": "^1.2"
+    } 
+}
