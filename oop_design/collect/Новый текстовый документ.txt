@@ -1,0 +1,20 @@
+что делать чтоб выполнить упражнение Collect?
+1. Подключаем к проекту lib collect через композер composer require tightenco/collect
+2. Функция внутри конструктора для коллект
+<?php
+$arr = [1,2,3,4,5,6,7,8,9];
+define('COUNT_COPY', 4);
+
+$test = array_map(function ($num) {
+  $res = [];
+  for ($i = 0; $i < COUNT_COPY; $i++) {
+    $res[] = $num;
+  }
+  return $res;
+}, $arr);
+
+echo "<pre>";
+print_r($test);
+echo "</pre>";
+
+3. потом flatten() и shuffle()
