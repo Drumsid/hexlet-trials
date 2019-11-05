@@ -1,5 +1,6 @@
 {
     "require": {
-        "php-ds/php-ds": "^1.2"
+        "php-ds/php-ds": "^1.2",
+        "tightenco/collect": "^6.4"
     } 
 }
