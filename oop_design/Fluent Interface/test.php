@@ -53,12 +53,13 @@ echo "</pre>";
 function myUnique($reduced)
 {
   foreach ($reduced as $key => $vol){
+    sort($vol);
     $reduced[$key] =  array_unique($vol);
   }
+  ksort($reduced);
   return $reduced;
 }
 
 echo "<pre>";
 print_r(myUnique($reduced));
 echo "</pre>";
-// еще нужно отсортировать массивы по алфавиту и ключи и значения
