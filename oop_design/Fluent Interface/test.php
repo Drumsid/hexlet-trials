@@ -54,7 +54,7 @@ function myUnique($reduced)
 {
   foreach ($reduced as $key => $vol){
     sort($vol);
-    $reduced[$key] =  array_unique($vol);
+    $reduced[$key] =  array_values(array_unique($vol));
   }
   ksort($reduced);
   return $reduced;
