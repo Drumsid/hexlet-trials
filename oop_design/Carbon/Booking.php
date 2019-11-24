@@ -46,8 +46,8 @@ class Booking
 	public function book($dayIn, $dayOut)
 	{
 		$arr = [];
-		$arr['dayIn'] = Carbon::create($dayIn);
-		$arr['dayOut'] = Carbon::create($dayOut);
+		$arr['dayIn'] = Carbon::create($dayIn)->hour(12)->minute(00)->second(00)->toDateTimeString();
+		$arr['dayOut'] = Carbon::create($dayOut)->hour(12)->minute(00)->second(00)->toDateTimeString();
 		self::$date[] = $arr;
 	}
 
