@@ -6,30 +6,72 @@ use Carbon\Carbon;
 
 $book = new Booking();
 
-$firstTrip = $book->book('10-11-2008', '12-11-2008');
-$secondTrip = $book->book('13-12-2009', '18-12-2009');
+$book->resetDate();
+
+$firstTrip = $book->book('10-11-2008', '05-11-2008');
+$secondTrip = $book->book('11-11-2008', '13-11-2008');
+$therdTrip = $book->book('12-11-2008', '12-11-2008');
+$forTrip = $book->book('10-11-2008', '12-11-2008');
+$fithTrip = $book->book('12-11-2008', '14-11-2008');
+$sixTrip = $book->book('10-11-2008', '11-11-2008');
+$sevenTrip = $book->book('12-11-2008', '13-11-2008');
+$eigthTrip = $book->book('13-11-2008', '13-11-2008');
+$nineTrip = $book->book('13-11-2008', '14-11-2008');
+$tenTrip = $book->book('08-11-2008', '18-11-2008');
+$elevenTrip = $book->book('08-05-2008', '18-05-2008');
+$twelwTrip = $book->book('09-05-2008', '10-05-2008');
+$therdTrip = $book->book('08-05-2008', '20-05-2008');
+$forthTrip = $book->book('07-05-2008', '18-05-2008');
+$fifthTrip = $book->book('08-05-2008', '18-05-2008');
 
 echo "<br>";
 echo "<pre>";
 print_r($book->getAllDate());
 echo "</pre>";
 
-// print_r($book::$date[0]['dayIn']);
+echo "<br>";
+echo "firstTrip = " . $firstTrip;
 
-// if ($book::$date[0]['dayIn'] > $book::$date[0]['dayOut']){
-// 	echo "dayIn = big";
-// } else {
-// 	echo "dayIn = small";
-// }
+echo "<br>";
+echo "secondTrip = " . $secondTrip;
 
-$checkDateIn = Carbon::create('14-12-2009')->hour(12)->minute(00)->second(00)->toDateTimeString();
+echo "<br>";
+echo "therdTrip = " . $therdTrip;
 
-foreach ($book::$date as ['dayIn' => $dayIn, 'dayOut' => $dayOut]) {
-	if ($checkDateIn > $dayIn && $checkDateIn < $dayOut) {
-		echo "stop";
-	}
-}
+echo "<br>";
+echo "forTrip = " . $forTrip;
 
-// echo $checkDate;
-// echo $book::$date[0]['dayOut'];
+echo "<br>";
+echo "fithTrip = " . $fithTrip;
+
+echo "<br>";
+echo "sixTrip = " . $sixTrip;
+
+echo "<br>";
+echo "sevenTrip = " . $sevenTrip;
+
+echo "<br>";
+echo "eigthTrip = " . $eigthTrip;
+
+echo "<br>";
+echo "nineTrip = " . $nineTrip;
+
+echo "<br>";
+echo "tenTrip = " . $tenTrip;
+
+echo "<br>";
+echo "elevenTrip = " . $elevenTrip;
+
+echo "<br>";
+echo "twelwTrip = " . $twelwTrip;
+
+echo "<br>";
+echo "therdTrip = " . $therdTrip;
+
+echo "<br>";
+echo "forthTrip = " . $forthTrip;
+
+echo "<br>";
+echo "fifthTrip = " . $fifthTrip;
+
 
