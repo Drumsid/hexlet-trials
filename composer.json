@@ -2,6 +2,7 @@
     "require": {
         "php-ds/php-ds": "^1.2",
         "tightenco/collect": "^6.4",
-        "nesbot/carbon": "^2.27"
+        "nesbot/carbon": "^2.27",
+        "danielstjules/stringy": "^3.1"
     } 
 }
