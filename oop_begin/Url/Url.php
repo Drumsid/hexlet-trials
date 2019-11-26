@@ -65,42 +65,42 @@ class Url
 //=================================hexlet solution ==================
 
     // BEGIN
-    private $scheme;
-    private $host;
-    private $queryParams;
+    // private $scheme;
+    // private $host;
+    // private $queryParams;
 
-    public function __construct($url)
-    {
-        $data = parse_url($url);
+    // public function __construct($url)
+    // {
+    //     $data = parse_url($url);
 
-        $this->scheme = $data['scheme'];
-        $this->host = $data['host'];
-        $this->queryParams = $this->parseQuery($data['query']);
-    }
+    //     $this->scheme = $data['scheme'];
+    //     $this->host = $data['host'];
+    //     $this->queryParams = $this->parseQuery($data['query']);
+    // }
 
-    public function getScheme()
-    {
-        return $this->scheme;
-    }
+    // public function getScheme()
+    // {
+    //     return $this->scheme;
+    // }
 
-    public function getQueryParams()
-    {
-        return $this->queryParams;
-    }
+    // public function getQueryParams()
+    // {
+    //     return $this->queryParams;
+    // }
 
-    public function getQueryParam($key, $defaultValue = null)
-    {
-        return $this->queryParams[$key] ?? $defaultValue;
-    }
+    // public function getQueryParam($key, $defaultValue = null)
+    // {
+    //     return $this->queryParams[$key] ?? $defaultValue;
+    // }
 
-    public function getHost()
-    {
-        return $this->host;
-    }
+    // public function getHost()
+    // {
+    //     return $this->host;
+    // }
 
-    private function parseQuery($query)
-    {
-        parse_str($query, $params);
-        return $params;
-    }
+    // private function parseQuery($query)
+    // {
+    //     parse_str($query, $params);
+    //     return $params;
+    // }
     // END

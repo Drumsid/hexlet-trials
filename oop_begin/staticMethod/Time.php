@@ -28,9 +28,9 @@ class Time
 //========hexlet solution =====================
 
     // BEGIN
-    public static function fromString($time)
-    {
-        [$h, $m] = explode(':', $time);
-        return new self($h, $m);
-    }
+    // public static function fromString($time)
+    // {
+    //     [$h, $m] = explode(':', $time);
+    //     return new self($h, $m);
+    // }
     // END

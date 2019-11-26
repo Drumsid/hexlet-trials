@@ -42,7 +42,7 @@ function compareVersion($version1, $version2)
 
 //=======================================Teacher SOLUTION ==================================================
 // BEGIN
-function compareVersion(string $first, string $second)
+function compareVersion2(string $first, string $second)
 {
     $version1 = explode('.', $first);
     $version2 = explode('.', $second);
@@ -50,5 +50,5 @@ function compareVersion(string $first, string $second)
     return $version1 <=> $version2;
 }
 // END
-}
+
 //=======================================Teacher SOLUTION ==================================================

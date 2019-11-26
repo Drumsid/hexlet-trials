@@ -1,6 +1,6 @@
 <?php
-Реализуйте функцию getMenCountByYear, которая принимает на вход список пользователей и возвращает массив, 
-в котором ключ это год рождения, а значение это количество мужчин, родившихся в этот год.
+// Реализуйте функцию getMenCountByYear, которая принимает на вход список пользователей и возвращает массив, 
+// в котором ключ это год рождения, а значение это количество мужчин, родившихся в этот год.
 
 
 // $users = [
@@ -68,7 +68,7 @@ function getMenCountByYear($arr){
 //=======================================Teacher SOLUTION ==================================================
 
 // BEGIN
-function getMenCountByYear(array $users)
+function getMenCountByYear2(array $users)
 {
     $menfolk = array_filter($users, function ($user) {
         return $user['gender'] === 'male';
