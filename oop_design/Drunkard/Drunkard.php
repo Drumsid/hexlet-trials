@@ -14,8 +14,9 @@ class Drunkard
 
     public function run($firstPlayer, $secondPlayer)
     {
-        $firstPlayer = new Deque();
-        $secondPlayer = new Deque();
+        $firstPlayer = new Deque($firstPlayer);
+        $secondPlayer = new Deque($secondPlayer);
+        return $firstPlayer->merge($secondPlayer);
     }
 
     
