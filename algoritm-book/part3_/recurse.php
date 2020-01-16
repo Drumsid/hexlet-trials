@@ -53,11 +53,59 @@ function fromLargeToSmall($numA, $numB)
 // Операцией возведения в степень пользоваться нельзя!
 function isPowTwo($num)
 {
-    if ($num !== 1 && $num > 1){
+    if ($num !== 1 && $num > 1) {
         return isPowTwo($num / 2);
     }
     if ($num == 1) {
         return 'yes';
     }
         return 'no';
+}
+
+// ================================================================================================
+
+// нужно разделить площадь квадрата или прямоугольника на макимально возможные одинаковые квадраты
+// пример quadro(1680, 640); => 160 / 80 максимальная длина стороны квадрата будет 80
+
+function width($hight, $width)
+{
+    if ($hight > $width) {
+        return $hight / $width;
+    }
+    if ($hight < $width) {
+        return $width / $hight;
+    }
+    return $hight / $width;
+}
+
+function findMaxLength($hight, $width)
+{
+    $result = [];
+    if ($hight > $width) {
+        $result['maxLen'] = $hight;
+        $result['minLen'] = $width;
+        return $result;
+    }
+    else {
+        $result['maxLen'] = $width;
+        $result['minLen'] = $hight;
+        return $result;
+    }
+}
+
+function quadro($maxLen, $minLen)
+{
+    $arrLen = findMaxLength($maxLen, $minLen);
+    ['maxLen' => $hight, 'minLen' => $width] = $arrLen;
+
+    if (2 == width($hight, $width)) {
+        // $result = $hight / $width;
+        return "{$hight}" . " / " .  "{$width}" . " максимальная длина стороны квадрата будет " . "{$width}";
+    }
+    if (1 == width($hight, $width)) {
+        $result = $hight / $width;
+        return "{$hight}" . " " .  "{$width}" . " максимальная длина стороны квадрата будет " . "{$result}";
+    }
+    $newLen = $hight - $width;
+    return quadro($newLen, $width);
 }
