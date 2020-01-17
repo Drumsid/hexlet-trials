@@ -85,8 +85,7 @@ function findMaxLength($hight, $width)
         $result['maxLen'] = $hight;
         $result['minLen'] = $width;
         return $result;
-    }
-    else {
+    } else {
         $result['maxLen'] = $width;
         $result['minLen'] = $hight;
         return $result;

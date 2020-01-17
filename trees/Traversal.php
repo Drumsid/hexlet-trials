@@ -1,6 +1,8 @@
 <?php
+
 // Реализуйте функцию downcaseFileNames, которая принимает на вход директорию, приводит имена всех файлов в этой
 //  и во всех вложенных директориях к нижнему регистру. Результат в виде обработанной директории возвращается наружу.
+
 $trees =  [
     'name' => '/',
     'type' => 'directory',
@@ -39,22 +41,43 @@ $trees =  [
     ],
 ];
 
-$recurse = function ($tree) use (&$recurse) {
-
-    if ($tree['type'] == 'file') {
-        $tree['name'] = strtolower($tree['name']);
-        echo $tree['name'] . "\n";
-        $children = null;
+// мое решение ===================================
+function downcaseFileNames($arr)
+{
+    if (isset($arr['name'])) {
+        $findName = $arr['name'];
     }
-    if ($tree['type'] == 'directory') {
-        $children = $tree['children'];
-        echo 0 . "\n";
+    if (isset($arr['type']) && $arr['type'] == 'file') {
+        $arr['name'] = strtolower($findName);
     }
-
-    if (!$children) {
-        return;
+    foreach ($arr as $key => $value) {
+        if (is_array($value) && count($value) > 0) {
+            $children = $value;
+            $arr[$key] = downcaseFileNames($children);
+        }
     }
-    return array_map($recurse, $children);
-};
+    return $arr;
+}
+// мое решение ===================================
 
-$recurse($trees);
+
+// решение учителя ===================================
+// BEGIN
+// function downcaseFileNames($tree)
+// {
+//     $downcaseFileNames = function ($node) use (&$downcaseFileNames) {
+//         if ($node['type'] === 'directory') {
+//             $updatedChildren = array_map($downcaseFileNames, $node['children']);
+//             return array_merge(
+//                 $node,
+//                 ['children' => $updatedChildren],
+//             );
+//         }
+
+//         return array_merge($node, ['name' => strtolower($node['name'])]);
+//     };
+
+//     return $downcaseFileNames($tree);
+// }
+// END
+// решение учителя ===================================
