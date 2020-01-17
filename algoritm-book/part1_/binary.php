@@ -4,7 +4,7 @@
 
 $arr = [2, 5, 7, 9, 12, 14, 16, 18, 19, 24, 27, 59];
 
-function rounEven($num)
+function roundEven($num)
 {
     if ($num % 2 !== 0) {
         return $num - 1;
@@ -18,7 +18,7 @@ function binary($arr, $search)
     $hight = count($arr) - 1;
 
     while ($low <= $hight) {
-        $mid = (rounEven($low + $hight)) / 2;
+        $mid = (roundEven($low + $hight)) / 2;
         $guess = $arr[$mid];
         if ($guess == $search) {
             return $mid;

@@ -59,7 +59,7 @@ function isPowTwo($num)
     if ($num == 1) {
         return 'yes';
     }
-        return 'no';
+    return 'no';
 }
 
 // ================================================================================================
@@ -107,4 +107,18 @@ function quadro($maxLen, $minLen)
     }
     $newLen = $hight - $width;
     return quadro($newLen, $width);
+}
+
+// ====================================
+// посчитать сумму всех чисел массива не используя циклы
+$arr = [1, 2, 3, 4, 5];
+
+function myCount($arr)
+{
+    $num = 0;
+    if (count($arr)) {
+        $num = array_shift($arr);
+        return  $num + myCount($arr);
+    }
+    return $num;
 }
