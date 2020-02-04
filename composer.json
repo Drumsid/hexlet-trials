@@ -4,5 +4,10 @@
         "tightenco/collect": "^6.4",
         "nesbot/carbon": "^2.27",
         "danielstjules/stringy": "^3.1"
-    } 
+    },
+    "autoload": {
+        "psr-4": {
+            "Hexlet\\Trials\\Classes\\": "classes"
+        }
+    }
 }
