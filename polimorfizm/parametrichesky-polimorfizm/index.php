@@ -3,6 +3,8 @@
 // require_once 'Node.php'; так можно подключится без autoload но тогда убрать namespace нужно
 // namespace App\LinkedList;
 
+// задача вытащить из массива (дерева) все (цифры) и вернуть массивом
+
 // пытался решить задачу из урока  PHP: Полиморфизм → Параметрический полиморфизм но там все надо объектами,
 // у меня же массивы. Но зато обошел дерево и вынул все числа
 
@@ -30,9 +32,6 @@ function parseTree($arr)
     return $result;
 }
 
-// $parseTree = parseTree($tree);
-// print_r($parseTree);
-// $expl = explode("-", $parseTree);
 
 // удаляем пустые значения массива
 function trimEmpty($arr)
