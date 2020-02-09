@@ -1,48 +1,4 @@
 <?php
-// В коде используются два разных map. Один самописный, другой — встроенный array_map. 
-$map = function ($f, $tree) use (&$map) {
-    $children = $tree[1] ?? null;
-
-    $newName = $f($tree);
-    if (!$children) {
-        return [$newName];
-    }
-
-    return [
-        $newName,
-        array_map(function ($el) use (&$map, &$f) {
-            return $map($f, $el);
-        }, $children),
-    ];
-};
-
-$tree = ['A', [
-    ['B', [['E'], ['F']]],
-    ['C'],
-    ['D', [['G'], ['J']]],
-]];
-
-echo json_encode($map(function ($tree) {
-    [$name] = $tree;
-    return strtolower($name);
-}, $tree));
-
-
-// мое первое решение задачи map но не прошло через тесты
-// function map($arr)
-// {
-//     foreach ($arr as $key => $value) {
-//         if ($key === 'name') {
-//           $arr['name'] = strtoupper($value);
-//         }
-//         if (is_array($value) && count($value) > 0) {
-//             $children = $value;
-//             $arr[$key] = downcaseFileNames($children);
-//         }
-//     }
-//     return $arr;
-// }
-
 
 $tree = [
     'name' => '/',
@@ -73,24 +29,50 @@ $tree = [
 ];
 
 
-// это решение тоже почему то не проходит
-$map = function ($func, $tree) use (&$map) {
-    if (isset($tree['name'])) {
-        $tree = $func($tree);
-    }
+// эта функция решает поставленную задачу но не проходит тест на hexlet
+// $map = function ($func, $tree) use (&$map) {
+//     if (isset($tree['name'])) {
+//         $tree = $func($tree);
+//     }
 
-    if (isset($tree['children']) && count($tree['children']) > 0) {
-        $children = $tree['children'];
-        $tree['children'] = array_map(function ($el) use (&$map, &$func) {
-            return $map($func, $el);
-        }, $children);
-    }
-    return $tree;
-};
+//     if (isset($tree['children']) && count($tree['children']) > 0) {
+//         $children = $tree['children'];
+//         $tree['children'] = array_map(function ($el) use (&$map, &$func) {
+//             return $map($func, $el);
+//         }, $children);
+//     }
+//     return $tree;
+// };
 
 // второе решение не проходит...
 // BEGIN (write your solution here)
-function map($tree)
+// function map($tree)
+// {
+//     $map = function ($func, $tree) use (&$map) {
+//         if (isset($tree['name'])) {
+//             $tree = $func($tree);
+//         }
+
+//         if (isset($tree['children']) && count($tree['children']) > 0) {
+//             $children = $tree['children'];
+//             $tree['children'] = array_map(function ($el) use (&$map, &$func) {
+//                 return $map($func, $el);
+//             }, $children);
+//         }
+//         return $tree;
+//     };
+
+//     return $map(function ($n) {
+//         return array_merge($n, ['name' => strtoupper($n['name'])]);
+//     }, $tree);
+// }
+// END
+
+
+//================================================================
+// вот мое решение, через жопу но работает.
+//================================================================
+function map($func, $tree)
 {
     $map = function ($func, $tree) use (&$map) {
         if (isset($tree['name'])) {
@@ -105,26 +87,38 @@ function map($tree)
         }
         return $tree;
     };
-
     return $map(function ($n) {
         return array_merge($n, ['name' => strtoupper($n['name'])]);
     }, $tree);
 }
-// END
 
+print_r(map(function ($n) {
+    return array_merge($n, ['name' => strtoupper($n['name'])]);
+}, $tree));
+//================================================================
+// вот мое решение, через жопу но работает.
+//================================================================
 
-// попытка написать с обработчиком
-function myMap($func, $tree)
+//================================================================
+// вот решение учителя буду смотреть что и как
+//================================================================
+// BEGIN
+function map2($func, $tree)
 {
-    if (isset($tree['name'])) {
-        $tree = $func($tree);
-    }
-
-    if (isset($tree['children']) && count($tree['children']) > 0) {
-        $children = $tree['children'];
-        $tree['children'] = array_map(function ($el) use (&$map, &$func) {
-            return $map($func, $el);
-        }, $children);
-    }
-    return $tree;
-};
+    $map = function ($f, $node) use (&$map) {
+        $updatedNode = $f($node);
+        $children = $node['children'] ?? [];
+        if ($node['type'] == 'directory') {
+            $updatedChildren = array_map(function ($n) use (&$f, &$map) {
+                return $map($f, $n);
+            }, $children);
+            return array_merge($updatedNode, ['children' => $updatedChildren]);
+        }
+        return $updatedNode;
+    };
+    return $map($func, $tree);
+}
+// END
+//================================================================
+// вот решение учителя буду смотреть что и как
+//================================================================
