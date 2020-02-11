@@ -17,6 +17,11 @@ echo "<pre>";
 print_r($tree);
 echo "</pre>";
 
+$count = 1;
+foreach ($tree as $key => $value) {
+    echo $count++;
+}
+
 // парсим дерево и вынимаем все цифры
 function parseTree($arr)
 {
@@ -37,7 +42,7 @@ function parseTree($arr)
 function trimEmpty($arr)
 {
     $result = array_filter($arr, function ($v) {
-        if (! empty($v)) {
+        if (!empty($v)) {
             return $v;
         }
     });
@@ -53,4 +58,4 @@ function getNumberFromArray($tree)
     return trimEmpty($exploded);
 }
 
-print_r(getNumberFromArray($tree));
+// print_r(getNumberFromArray($tree));
