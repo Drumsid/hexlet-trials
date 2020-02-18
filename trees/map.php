@@ -87,9 +87,7 @@ function map($func, $tree)
         }
         return $tree;
     };
-    return $map(function ($n) {
-        return array_merge($n, ['name' => strtoupper($n['name'])]);
-    }, $tree);
+    return $map($func, $tree);
 }
 
 print_r(map(function ($n) {
