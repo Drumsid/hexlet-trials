@@ -12,17 +12,17 @@ use Hexlet\Trials\Classes\Node;
 
 require_once '../../vendor/autoload.php';
 
-$tree = new Node(1, new Node(2, new Node(3)));
-echo "<pre>";
-print_r($tree);
-echo "</pre>";
+// $tree = new Node(1, new Node(2, new Node(3)));
+// echo "<pre>";
+// print_r($tree);
+// echo "</pre>";
 
-$count = 1;
-foreach ($tree as $key => $value) {
-    echo $count++;
-}
+// $count = 1;
+// foreach ($tree as $key => $value) {
+//     echo $count++;
+// }
 
-// парсим дерево и вынимаем все цифры
+// // парсим дерево и вынимаем все цифры
 function parseTree($arr)
 {
     $result = '';
@@ -38,7 +38,7 @@ function parseTree($arr)
 }
 
 
-// удаляем пустые значения массива
+// // удаляем пустые значения массива
 function trimEmpty($arr)
 {
     $result = array_filter($arr, function ($v) {
@@ -50,7 +50,7 @@ function trimEmpty($arr)
 }
 
 
-// решение задачи
+// // решение задачи
 function getNumberFromArray($tree)
 {
     $parseTree = parseTree($tree);
@@ -58,4 +58,29 @@ function getNumberFromArray($tree)
     return trimEmpty($exploded);
 }
 
-// print_r(getNumberFromArray($tree));
+// // print_r(getNumberFromArray($tree));
+
+$acc = [1,2,3,4,5];
+$rev = function ($list, $acc) use (&$rev) {
+    if (count($acc) == 0) {
+        return $list = '';
+    }
+    $list = array_pop($acc);
+    return $list .= $rev($list, $acc);
+};
+
+// print_r($rev('', $acc));
+// print_r(1);
+
+$rev = function ($list, $acc) use (&$rev) {
+    if (count($acc) == 1) {
+        [$list] = $acc;
+        return new Node($list);
+    }
+    $list = array_pop($acc);
+    return new Node($list, $rev($list, $acc));
+};
+
+echo "<pre>";
+print_r($rev('', $acc));
+echo "</pre>";
