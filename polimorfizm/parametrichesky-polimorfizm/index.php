@@ -8,21 +8,17 @@
 // пытался решить задачу из урока  PHP: Полиморфизм → Параметрический полиморфизм но там все надо объектами,
 // у меня же массивы. Но зато обошел дерево и вынул все числа
 
+// потм решил через неделю, но разве это можно назвать решением после того как увидел решение учителя?
+
 use Hexlet\Trials\Classes\Node;
 
 require_once '../../vendor/autoload.php';
 
 $tree = new Node(1, new Node(2, new Node(3)));
-echo "<pre>";
-print_r($tree);
-echo "</pre>";
 
-$count = 1;
-foreach ($tree as $key => $value) {
-    echo $count++;
-}
-
-// парсим дерево и вынимаем все цифры
+//================================================
+// my solution
+//================================================
 function parseTree($arr)
 {
     $result = '';
@@ -37,8 +33,6 @@ function parseTree($arr)
     return $result;
 }
 
-
-// удаляем пустые значения массива
 function trimEmpty($arr)
 {
     $result = array_filter($arr, function ($v) {
@@ -50,12 +44,56 @@ function trimEmpty($arr)
 }
 
 
-// решение задачи
-function getNumberFromArray($tree)
+$rev = function ($list, $acc) use (&$rev) {
+    if (count($acc) == 1) {
+        [$list] = $acc;
+        return new Node($list);
+    }
+    $list = array_shift($acc);
+    return new Node($list, $rev($list, $acc));
+};
+
+function reverse($tree)
 {
-    $parseTree = parseTree($tree);
-    $exploded = explode("-", $parseTree);
-    return trimEmpty($exploded);
+    if (is_bool($tree->getValue())) {
+        return $tree;
+    }
+    $strTree = explode('-', parseTree($tree));
+    $noEmpty = trimEmpty($strTree);
+
+
+    $rev = function ($list, $acc) use (&$rev) {
+        if (count($acc) == 1) {
+            [$list] = $acc;
+            return new Node($list);
+        }
+        $list = array_shift($acc);
+        return new Node($list, $rev($list, $acc));
+    };
+    return $rev('', $noEmpty);
+}
+//================================================
+// my solution
+//================================================
+
+
+
+//================================================
+// hexlet solution
+//================================================
+
+function reverse2($list)
+{
+    $newHead = null;
+    $current = $list;
+    while ($current) {
+        $newHead = new Node($current->getValue(), $newHead);
+        $current = $current->getNext();
+    }
+
+    return $newHead;
 }
 
-// print_r(getNumberFromArray($tree));
+//================================================
+// hexlet solution
+//================================================
