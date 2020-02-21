@@ -1,124 +1,128 @@
 <?php
 
-require_once 'sourse.php';
+function isDirectory($node)
+{
+    return $node['type'] == 'directory';
+}
 
-
-$tree = mkdir2('/', [
-    mkdir2('etc', [
-        mkdir2('nginx', [
-            mkdir2('conf.d'),
-        ]),
-        mkdir2('consul', [
-            mkfile('config.json'),
-        ]),
-    ]),
-    mkfile('hosts'),
-]);
-
-echo "<pre>";
-// print_r($tree);
-echo "</pre>";
-
-$filter = function ($f, $tree) use (&$filter) {
-    if (!$f($tree)) {
-        return null;
-    }
-    [$name] = $tree;
-    $children = $tree[1] ?? null;
-
-    echo $name . "\n";
-
-    if (!$children) {
-        return $tree;
-    }
-
-    $filteredChildren = array_map(function ($el) use (&$f, &$filter) {
-        return $filter($f, $el);
-    }, $children);
-
-    return [
-        $name,
-        array_values(
-            array_filter($filteredChildren, function ($n) {
-                return $n !== null;
-            })
-        ),
-    ];
-};
-
-// $filtered = $filter(
-//     function ($tree) {
-//         [$name] = $tree;
-//         return $name === strtolower($name);
-//     },
-//     $tree
-// );
-
-echo "<pre>";
-// print_r($tree);
-echo "</pre>";
-
-$test = [
+$tree = [
     'name' => '/',
-    'type' => 'directory',
-    'meta' => [],
     'children' => [
         [
-            'name' => 'etc',
-            'type' => 'directory',
-            'meta' => []
+            'name' => 'consul',
+            'children' => [
+                [
+                    'name' => 'kets',
+                    'meta' => [],
+                    'type' => 'file'
+                ]
+            ],
+            'meta' => [],
+            'type' => 'directory'
         ]
-    ]
+    ],
+    'meta' => [],
+    'type' => 'directory'
 ];
 
-// var_dump(isDirectory($test));
+$tree2 = [
+    'name' => '/',
+    'children' => [
+                [
+                    'name' => 'etc',
+                    'children' => [
+                                [
+                                    'name' => 'nginx',
+                                    'children' => [
+                                                [
+                                                    'name' => 'conf.d',
+                                                    'children' => [],
 
-// [
-//   'name' => '/',
-//   'type' => 'directory',
-//   'meta' => [],
-//   'children' => [
-//     [
-//       'name' => 'etc',
-//       'type' => 'directory',
-//       'meta' => [],
-//       'children' => [
-//         [
-//           'name' => 'nginx',
-//           'type' => 'directory',
-//           'meta' => [],
-//           'children' => [[
-//             'name' => 'conf.d',
-//             'type' => 'directory',
-//             'meta' => [],
-//             'children' => [],
-//           ]],
-//         ],
-//         [
-//           'name' => 'consul',
-//           'type' => 'directory',
-//           'meta' => [],
-//           'children' => [],
-//         ],
-//       ],
-//     ],
-//   ],
-// ]
+                                                    'meta' => [],
 
-// $filtered = $filter(
-//     function ($tree) {
-//         [$name] = $tree;
-//         return $name === isDirectory($name);
-//     },
-//     $tree
-// );
+                                                    'type' => 'directory'
+                                                ]
 
-$f = array_filter($tree, function ($tr) {
-    if (isDirectory($tr)) {
-        return 22;
-    }
-});
+                                            ],
+
+                                    'meta' => [],
+
+                                    'type' => 'directory',
+                                        ],
+
+                                [
+                                    'name' => 'consul',
+                                    'children' => [
+                                                [
+                                                    'name' => 'config.json',
+                                                    'meta' => [],
+
+                                                    'type' => 'file',
+                                            ]
+
+                                            ],
+
+                                    'meta' => [],
+
+                                    'type' => 'directory',
+                                        ],
+
+                                        ],
+
+                    'meta' => [],
+
+                    'type' => 'directory',
+                ],
+                [
+                    'name' => 'hosts',
+                    'meta' => [],
+                    'type' => 'file'
+                ],
+    ],
+    'meta' => [],
+    'type' => 'directory'
+];
+
+
+function filter($func, $tree)
+{
+    $filter = function ($func, $tree) use (&$filter) {
+        if ($func($tree) != true) {
+            return null;
+        }
+        if (isset($tree['children']) && count($tree['children']) > 0) {
+            $children = $tree['children'];
+            $tree['children'] = array_map(function ($el) use (&$filter, &$func) {
+                return $filter($func, $el);
+            }, $children);
+        }
+            return $tree;
+    };
+
+    return $filter($func, $tree);
+}
+
+
+$test = filter(function ($n) {
+    return isDirectory($n);
+}, $tree2);
+
+
 
 echo "<pre>";
-print_r($f);
+print_r($test);
+echo "</pre>";
+
+echo "<pre>";
+// var_dump($test['children'][1]);
+echo "</pre>";
+
+// $result = array_filter($test, function ($test) {
+//     if ($test['children'] != null) {
+//         return $test;
+//     }
+// });
+
+echo "<pre>";
+// print_r($result);
 echo "</pre>";
