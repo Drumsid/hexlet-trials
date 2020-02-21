@@ -14,25 +14,11 @@ use Hexlet\Trials\Classes\Node;
 
 require_once '../../vendor/autoload.php';
 
-<<<<<<< HEAD
 $tree = new Node(1, new Node(2, new Node(3)));
 
 //================================================
 // my solution
 //================================================
-=======
-// $tree = new Node(1, new Node(2, new Node(3)));
-// echo "<pre>";
-// print_r($tree);
-// echo "</pre>";
-
-// $count = 1;
-// foreach ($tree as $key => $value) {
-//     echo $count++;
-// }
-
-// // парсим дерево и вынимаем все цифры
->>>>>>> a0867b4948a23b98fd39c88702c7fe5688273759
 function parseTree($arr)
 {
     $result = '';
@@ -47,11 +33,6 @@ function parseTree($arr)
     return $result;
 }
 
-<<<<<<< HEAD
-=======
-
-// // удаляем пустые значения массива
->>>>>>> a0867b4948a23b98fd39c88702c7fe5688273759
 function trimEmpty($arr)
 {
     $result = array_filter($arr, function ($v) {
@@ -63,7 +44,6 @@ function trimEmpty($arr)
 }
 
 
-<<<<<<< HEAD
 $rev = function ($list, $acc) use (&$rev) {
     if (count($acc) == 1) {
         [$list] = $acc;
@@ -103,10 +83,6 @@ function reverse($tree)
 //================================================
 
 function reverse2($list)
-=======
-// // решение задачи
-function getNumberFromArray($tree)
->>>>>>> a0867b4948a23b98fd39c88702c7fe5688273759
 {
     $newHead = null;
     $current = $list;
@@ -118,35 +94,6 @@ function getNumberFromArray($tree)
     return $newHead;
 }
 
-<<<<<<< HEAD
 //================================================
 // hexlet solution
 //================================================
-=======
-// // print_r(getNumberFromArray($tree));
-
-$acc = [1,2,3,4,5];
-$rev = function ($list, $acc) use (&$rev) {
-    if (count($acc) == 0) {
-        return $list = '';
-    }
-    $list = array_pop($acc);
-    return $list .= $rev($list, $acc);
-};
-
-// print_r($rev('', $acc));
-// print_r(1);
-
-$rev = function ($list, $acc) use (&$rev) {
-    if (count($acc) == 1) {
-        [$list] = $acc;
-        return new Node($list);
-    }
-    $list = array_pop($acc);
-    return new Node($list, $rev($list, $acc));
-};
-
-echo "<pre>";
-print_r($rev('', $acc));
-echo "</pre>";
->>>>>>> a0867b4948a23b98fd39c88702c7fe5688273759
